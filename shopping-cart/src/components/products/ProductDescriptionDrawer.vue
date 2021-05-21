@@ -16,33 +16,29 @@
       </div>
       <div class="button-container">
         <button class="remove">Remove</button>
-        <button class="add">Add</button>
+        <button class="add" @click="addToCart()">Add</button>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
-import { useStore } from "vuex";
-import { Item } from "@/interface/index";
-
+import { defineComponent, computed } from "vue";
+import { useStore } from "@/store/index";
 export default defineComponent({
-  props: ["active"],
-  setup() {
-    const product = ref<Item>();
+  props: ["product", "active"],
+  setup(props) {
     const store = useStore();
     const addToCart = () => {
-      store.commit("addToCart", product);
+      store.commit("addToCart", props.product);
     };
-    const product_total = () => {
-      return store.getters.productQuantity(product);
-    };
+    const product_total = computed((): number =>
+      store.getters.productQuantity(props.product)
+    );
 
     return {
       product_total,
       addToCart,
-      product,
     };
   },
 });

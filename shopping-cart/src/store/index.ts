@@ -6,7 +6,6 @@ function updateLocalStorage(cart:any) {
   localStorage.setItem('cart', JSON.stringify(cart))
 }
 
-
 export interface State {
   cart: Item[]
 }
@@ -47,7 +46,7 @@ export const store = createStore<State>({
     
 })
 
-export function useStore(){
-    return baseUseStore(key)
+export const useStore = () => {
+  return baseUseStore(key);
 }
 
