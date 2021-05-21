@@ -23,17 +23,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
+import { useStore } from "vuex";
+import { Item } from "@/interface/index";
 
 export default defineComponent({
-  props: ["product", "active"],
+  props: ["active"],
   setup() {
+    const product = ref<Item>();
+    const store = useStore();
+    const addToCart = () => {
+      store.commit("addToCart", product);
+    };
     const product_total = () => {
-      return 56.0;
+      return store.getters.productQuantity(product);
     };
 
     return {
       product_total,
+      addToCart,
+      product,
     };
   },
 });

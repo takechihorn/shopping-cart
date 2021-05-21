@@ -3,6 +3,7 @@
     <ProductDescriptionDrawer
       :product="product"
       :active="active.product_drawer"
+      v-on:close-product-drawer="closeProductDrawer()"
     />
     <div class="products-cards-container">
       <ProductSummaryCard
@@ -40,10 +41,14 @@ export default defineComponent({
       state.active.product_drawer = true;
       console.log(state.product);
     };
+    const closeProductDrawer = () => {
+      state.active.product_drawer = false;
+    };
 
     return {
       ...toRefs(state),
       viewProduct,
+      closeProductDrawer,
     };
   },
 });
