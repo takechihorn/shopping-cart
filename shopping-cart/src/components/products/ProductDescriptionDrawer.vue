@@ -15,7 +15,7 @@
         <h4>{{ product_total }}</h4>
       </div>
       <div class="button-container">
-        <button class="remove">Remove</button>
+        <button class="remove" @click="removeFromCart()">Remove</button>
         <button class="add" @click="addToCart()">Add</button>
       </div>
     </div>
@@ -32,6 +32,10 @@ export default defineComponent({
     const addToCart = () => {
       store.commit("addToCart", props.product);
     };
+
+    const removeFromCart = () => {
+      store.commit("removeProduct", props.product);
+    };
     const product_total = computed((): number =>
       store.getters.productQuantity(props.product)
     );
@@ -39,6 +43,7 @@ export default defineComponent({
     return {
       product_total,
       addToCart,
+      removeFromCart,
     };
   },
 });

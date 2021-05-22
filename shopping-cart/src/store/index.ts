@@ -25,6 +25,13 @@ export const store = createStore<State>({
         else return null
       }
     },
+    cartItems(state) {
+      return state.cart
+    },
+    cartTotal(state) {
+      return state.cart.reduce((a, b) => a + (b.price * b.quantity), 0)
+      //初期値は0でカートに入ってる数と値段をかけて合計を足している
+    }
   },
     mutations: {
       addToCart(state, product) {
@@ -38,6 +45,23 @@ export const store = createStore<State>({
       }
       updateLocalStorage(state.cart)
       },
+      removeProduct(state, product) {
+        const item = state.cart.find(i => i.id === product.id)
+        if (item) {
+          if (item.quantity > 1) {
+            item.quantity--
+          } else {
+            state.cart = state.cart.filter(i => i.id !== product.id)
+          }
+        }
+        updateLocalStorage(state.cart)
+      },
+      updateCartFromLocalStorage(state) {
+        const cart = localStorage.getItem('cart')
+        if (cart) {
+          state.cart = JSON.parse(cart)
+        }
+      }
   },
     actions: {
   },

@@ -11,6 +11,19 @@
   <router-view />
 </template>
 
+<script lang="ts">
+import { defineComponent, onMounted } from "vue";
+import { useStore } from "./store/index";
+export default defineComponent({
+  setup() {
+    const store = useStore();
+    onMounted(() => {
+      store.commit("updateCartFromLocalStorage");
+    });
+  },
+});
+</script>
+
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

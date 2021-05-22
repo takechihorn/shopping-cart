@@ -47,17 +47,16 @@ export default defineComponent({
   p.text-muted {
     color: gray;
   }
-
-  button.view-product-button {
-    padding: 10px;
-    background-color: rgb(79, 160, 187);
-    border: none;
-    color: white;
-    font-weight: bold;
-    font-size: 1.15rem;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+}
+button.view-product-button {
+  padding: 10px;
+  background-color: rgb(79, 160, 187);
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1.15rem;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 // @media (min-width: 500px) {
